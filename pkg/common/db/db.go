@@ -3,7 +3,7 @@ package db
 import (
 	"log"
 
-	// "github.com/vadimegorov13/go-fiber-crm/pkg/common/models"
+	"github.com/vadimegorov13/go-fiber-crm/pkg/common/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -18,7 +18,8 @@ func InitDB() *gorm.DB {
 		log.Println("The database is connected")
 	}
 
-	// db.AutoMigrate(&models.Image{})
+	db.AutoMigrate(&models.Lead{})
+	log.Println("Dtabase migrated!")
 
 	return db
 }
