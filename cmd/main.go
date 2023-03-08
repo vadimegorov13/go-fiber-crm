@@ -11,13 +11,15 @@ import (
 )
 
 func main() {
+	dbHandler := db.InitDB()
+
 	fiberConf := config.FiberConfig()
-	logConf := config.LoggerConfig()
+	logConf, file := config.LoggerConfig()
+	defer file.Close()
 
 	app := fiber.New(fiberConf)
 	app.Use(logger.New(logConf))
 
-	dbHandler := db.InitDB()
 	lead.RegisterRoutes(app, dbHandler)
 
 	log.Fatal(app.Listen(":3000"))
